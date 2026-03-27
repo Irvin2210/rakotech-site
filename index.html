@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RakoTech | PhD Researcher & Tech Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#00d4ff',
+                        secondary: '#0099cc',
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 15s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 50%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+        
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .skill-bar {
+            background: linear-gradient(90deg, #00d4ff 0%, #0099cc 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 1s ease-out;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(0, 212, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00d4ff;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 153, 204, 0.2) 100%);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-xl">R</div>
+                    <span class="font-bold text-2xl tracking-tight">Rako<span class="text-primary">Tech</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#accueil" class="nav-link hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
+                        <a href="#services" class="nav-link hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="#apropos" class="nav-link hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">À propos</a>
+                        <a href="#competences" class="nav-link hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Compétences</a>
+                        <a href="#contact" class="bg-primary text-dark px-6 py-2 rounded-full font-semibold hover:bg-secondary transition-all transform hover:scale-105">Me contacter</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="toggleMenu()" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#accueil" class="block px-3 py-2 rounded-md text-base font-medium hover:text-primary hover:bg-white/5">Accueil</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium hover:text-primary hover:bg-white/5">Services</a>
+                <a href="#apropos" class="block px-3 py-2 rounded-md text-base font-medium hover:text-primary hover:bg-white/5">À propos</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-primary">Me contacter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 grid-bg"></div>
+        <div id="particles" class="absolute inset-0"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-float mb-8 inline-block">
+                <span class="px-4 py-2 rounded-full glass text-primary text-sm font-mono tracking-wider border border-primary/30">
+                    🎓 PhD en Mécanique des Fluides
+                </span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                <span class="block mb-2">Solutions</span>
+                <span class="text-gradient typing-cursor" id="typing-text">Techniques & Scientifiques</span>
+            </h1>
+            
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 leading-relaxed">
+                Doctorant en Mécanique des Fluides et Systèmes Énergétiques. 
+                Développeur Python & MATLAB, Expert Excel/VBA, Technicien Réseau et Monteur Vidéo Professionnel.
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#services" class="px-8 py-4 rounded-full bg-primary text-dark font-bold text-lg hover:bg-secondary transition-all transform hover:scale-105 glow">
+                    Voir mes services
+                </a>
+                <a href="#contact" class="px-8 py-4 rounded-full glass text-white font-bold text-lg hover:bg-white/10 transition-all border border-white/20">
+                    Discuter d'un projet
+                </a>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="glass rounded-2xl p-6 text-center card-hover">
+                    <div class="text-3xl font-bold text-primary mb-1">50+</div>
+                    <div class="text-sm text-gray-400">Projets réalisés</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center card-hover">
+                    <div class="text-3xl font-bold text-primary mb-1">5★</div>
+                    <div class="text-sm text-gray-400">Satisfaction client</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center card-hover">
+                    <div class="text-3xl font-bold text-primary mb-1">24h</div>
+                    <div class="text-sm text-gray-400">Délai rapide</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center card-hover">
+                    <div class="text-3xl font-bold text-primary mb-1">FR/EN</div>
+                    <div class="text-sm text-gray-400">Bilingue</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Mes <span class="text-gradient">Services</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Des solutions sur mesure pour vos projets scientifiques, techniques et créatifs
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Service 1: Simulation -->
+                <div class="glass-strong rounded-3xl p-8 card-hover group cursor-pointer" onclick="showServiceDetail('simulation')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center text-3xl">
+                            🔬
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold">POPULAIRE</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">Simulation Scientifique</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Simulations numériques, CFD, résolution d'équations différentielles, transfert de chaleur en Python/MATLAB. Support thèse et recherche académique.
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm text-gray-300">
+                        <li class="flex items-center gap-2">✓ Dynamique des fluides (CFD)</li>
+                        <li class="flex items-center gap-2">✓ Systèmes énergétiques</li>
+                        <li class="flex items-center gap-2">✓ Méthodes numériques avancées</li>
+                    </ul>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-bold text-xl">À partir de 20$</span>
+                        <button class="text-primary hover:underline flex items-center gap-2">
+                            En savoir plus →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 2: Python/Data -->
+                <div class="glass-strong rounded-3xl p-8 card-hover group cursor-pointer" onclick="showServiceDetail('python')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center text-3xl">
+                            🐍
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">Python & Data Analysis</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Scripts d'automatisation, web scraping, analyse de données (Pandas, NumPy), visualisation (Matplotlib, Seaborn). Code propre et documenté.
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm text-gray-300">
+                        <li class="flex items-center gap-2">✓ Web scraping (BeautifulSoup, Selenium)</li>
+                        <li class="flex items-center gap-2">✓ Traitement de données massives</li>
+                        <li class="flex items-center gap-2">✓ Automatisation de rapports</li>
+                    </ul>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-bold text-xl">À partir de 15$</span>
+                        <button class="text-primary hover:underline flex items-center gap-2">
+                            En savoir plus →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 3: Excel/VBA -->
+                <div class="glass-strong rounded-3xl p-8 card-hover group cursor-pointer" onclick="showServiceDetail('excel')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center text-3xl">
+                            📊
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">Excel & VBA Expert</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Tableaux de bord interactifs, macros VBA sur mesure, automatisation de tâches répétitives, calculateurs financiers/scientifiques.
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm text-gray-300">
+                        <li class="flex items-center gap-2">✓ Dashboards interactifs</li>
+                        <li class="flex items-center gap-2">✓ Macros d'automatisation</li>
+                        <li class="flex items-center gap-2">✓ Nettoyage et traitement de données</li>
+                    </ul>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-bold text-xl">À partir de 15$</span>
+                        <button class="text-primary hover:underline flex items-center gap-2">
+                            En savoir plus →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 4: Video -->
+                <div class="glass-strong rounded-3xl p-8 card-hover group cursor-pointer" onclick="showServiceDetail('video')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center text-3xl">
+                            🎬
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">Montage Vidéo Pro</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Édition de vidéos YouTube, cours en ligne, présentations scientifiques. Sous-titres FR/EN, transitions fluides, équilibrage audio.
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm text-gray-300">
+                        <li class="flex items-center gap-2">✓ Sous-titres bilingues</li>
+                        <li class="flex items-center gap-2">✓ Montage éducatif/corporatif</li>
+                        <li class="flex items-center gap-2">✓ Livraison 24-48h</li>
+                    </ul>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-bold text-xl">À partir de 10$</span>
+                        <button class="text-primary hover:underline flex items-center gap-2">
+                            En savoir plus →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Pourquoi me <span class="text-gradient">choisir ?</span>
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-primary font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Expertise Scientifique</h4>
+                                <p class="text-gray-400">Doctorant en Mécanique des Fluides avec une approche rigoureuse et méthodologique.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-primary font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Polyvalence Technique</h4>
+                                <p class="text-gray-400">Compétences variées allant du code (Python/MATLAB) au montage vidéo en passant par les réseaux.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-primary font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Communication Claire</h4>
+                                <p class="text-gray-400">Bilingue FR/EN, pédagogie naturelle, documentation complète fournie avec chaque livrable.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-6">
+                        <a href="#contact" class="inline-flex items-center gap-2 text-primary hover:gap-4 transition-all font-semibold">
+                            Travaillons ensemble <span class="text-2xl">→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="glass-strong rounded-3xl p-8 relative z-10">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-4">
+                                <div class="glass rounded-2xl p-4 text-center">
+                                    <div class="text-3xl mb-2">🎓</div>
+                                    <div class="font-bold text-sm">PhD Researcher</div>
+                                </div>
+                                <div class="glass rounded-2xl p-4 text-center">
+                                    <div class="text-3xl mb-2">🎰</div>
+                                    <div class="font-bold text-sm">Network Tech</div>
+                                </div>
+                            </div>
+                            <div class="space-y-4 mt-8">
+                                <div class="glass rounded-2xl p-4 text-center">
+                                    <div class="text-3xl mb-2">💻</div>
+                                    <div class="font-bold text-sm">Dev Python</div>
+                                </div>
+                                <div class="glass rounded-2xl p-4 text-center">
+                                    <div class="text-3xl mb-2">🎬</div>
+                                    <div class="font-bold text-sm">Video Editor</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-2xl -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="competences" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Compétences <span class="text-gradient">Techniques</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">💻</span>
+                        Programmation & Data
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Python (Pandas, NumPy, Matplotlib)</span>
+                                <span class="text-primary">95%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[95%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">MATLAB & Simulink</span>
+                                <span class="text-primary">90%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[90%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Web Scraping (BeautifulSoup, Selenium)</span>
+                                <span class="text-primary">85%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[85%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">📊</span>
+                        Excel & Bureautique
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Excel Avancé & Formules Complexes</span>
+                                <span class="text-primary">95%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[95%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">VBA & Macros</span>
+                                <span class="text-primary">90%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[90%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Tableaux de Bord & Dashboards</span>
+                                <span class="text-primary">88%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[88%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">🔬</span>
+                        Scientifique & CFD
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Mécanique des Fluides & CFD</span>
+                                <span class="text-primary">92%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[92%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Méthodes Numériques (FEM, Runge-Kutta)</span>
+                                <span class="text-primary">88%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[88%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Transfert de Chaleur & Thermodynamique</span>
+                                <span class="text-primary">90%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[90%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">🎬</span>
+                        Créatif & Technique
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Montage Vidéo & Post-production</span>
+                                <span class="text-primary">85%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[85%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Sous-titrage FR/EN</span>
+                                <span class="text-primary">90%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[90%]"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Administration Réseau & IT Support</span>
+                                <span class="text-primary">80%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="skill-bar w-[80%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-strong rounded-3xl p-8 md:p-12">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold mb-4">Discutons de votre <span class="text-gradient">projet</span></h2>
+                    <p class="text-gray-400">Disponible pour des missions freelance, collaborations académiques ou projets techniques</p>
+                </div>
+                
+                <form id="contactForm" class="space-y-6" onsubmit="handleSubmit(event)">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Nom</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:outline-none transition-colors text-white placeholder-gray-500" placeholder="Votre nom">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:outline-none transition-colors text-white placeholder-gray-500" placeholder="votre@email.com">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Type de projet</label>
+                        <select class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:outline-none transition-colors text-white">
+                            <option>Simulation Scientifique (Python/MATLAB)</option>
+                            <option>Automatisation & Data Analysis</option>
+                            <option>Excel/VBA Dashboard</option>
+                            <option>Montage Vidéo</option>
+                            <option>Autre / Collaboration</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Description du projet</label>
+                        <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:outline-none transition-colors text-white placeholder-gray-500" placeholder="Décrivez votre projet, vos besoins et votre deadline..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-4 rounded-xl bg-primary text-dark font-bold text-lg hover:bg-secondary transition-all transform hover:scale-[1.02] glow">
+                        Envoyer la demande
+                    </button>
+                    
+                    <p class="text-center text-sm text-gray-500">
+                        Réponse garantie sous 24h • Bilingue FR/EN
+                    </p>
+                </form>
+                
+                <div id="successMessage" class="hidden text-center py-12">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 flex items-center justify-center text-4xl">✓</div>
+                    <h3 class="text-2xl font-bold mb-2 text-green-400">Message envoyé !</h3>
+                    <p class="text-gray-400">Je vous réponds dans les plus brefs délais.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 grid md:grid-cols-3 gap-6 text-center">
+                <div class="glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">📧</div>
+                    <div class="font-semibold mb-1">Email</div>
+                    <div class="text-sm text-gray-400">irvinnet@gmail.com</div>
+                </div>
+                <div class="glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">💬</div>
+                    <div class="font-semibold mb-1">Fiverr</div>
+                    <div class="text-sm text-gray-400">@dr_fluides_tech</div>
+                </div>
+                <div class="glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">🌐</div>
+                    <div class="font-semibold mb-1">LinkedIn</div>
+                    <div class="text-sm text-gray-400">RakoTech MG</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold">R</div>
+                <span class="font-bold text-xl">Rako<span class="text-primary">Tech</span></span>
+            </div>
+            
+            <div class="flex gap-8 text-sm text-gray-400">
+                <a href="#services" class="hover:text-primary transition-colors">Services</a>
+                <a href="#apropos" class="hover:text-primary transition-colors">À propos</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+            
+            <div class="text-sm text-gray-500">
+                © 2024 RakoTech. PhD Researcher & Developer.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal pour détails service -->
+    <div id="serviceModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="glass-strong rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">✕</button>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Typing effect
+        const texts = ["Scientifiques", "Techniques", "Data Analysis", "CFD & Python", "Excel Pro"];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing-text');
+        
+        function type() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(type, typeSpeed);
+        }
+        
+        // Démarrer l'effet de typing
+        setTimeout(type, 1000);
+        
+        // Particules animées
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.5;
+                
+                const duration = Math.random() * 20 + 10;
+                particle.style.animation = `float ${duration}s infinite ease-in-out`;
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+        
+        // Menu mobile
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        
+        // Animation au scroll pour les barres de compétences
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.style.width;
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.skill-bar').forEach(bar => {
+            observer.observe(bar);
+        });
+        
+        // Gestion du formulaire
+        function handleSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contactForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            
+            // Ici vous pourriez ajouter l'envoi réel à un backend
+            setTimeout(() => {
+                document.getElementById('contactForm').reset();
+                document.getElementById('contactForm').classList.remove('hidden');
+                document.getElementById('successMessage').classList.add('hidden');
+            }, 5000);
+        }
+        
+        // Modal services
+        const serviceDetails = {
+            simulation: {
+                title: "Simulation Scientifique",
+                icon: "🔬",
+                price: "20$ - 100$",
+                content: `
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3"><span class="text-4xl">🔬</span> Simulation Scientifique</h3>
+                    <p class="text-gray-300 mb-6">En tant que doctorant en Mécanique des Fluides, je propose des simulations numériques de haute qualité pour la recherche et l'industrie.</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="glass rounded-xl p-4 border-l-4 border-primary">
+                            <h4 class="font-bold mb-2">Package Basic - 20$</h4>
+                            <ul class="text-sm text-gray-400 space-y-1">
+                                <li>• Script simple (Python/MATLAB)</li>
+                                <li>• Explication détaillée du code</li>
+                                <li>• 1 révision incluse</li>
+                                <li>• Livraison 2-3 jours</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass rounded-xl p-4 border-l-4 border-secondary">
+                            <h4 class="font-bold mb-2">Package Standard - 50$</h4>
+                            <ul class="text-sm text-gray-400 space-y-1">
+                                <li>• Simulation complète avec paramètres</li>
+                                <li>• Rapport technique détaillé</li>
+                                <li>• Visualisation des résultats (graphs)</li>
+                                <li>• 3 révisions incluses</li>
+                                <li>• Livraison 3-5 jours</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass rounded-xl p-4 border-l-4 border-green-400">
+                            <h4 class="font-bold mb-2">Package Premium - 100$</h4>
+                            <ul class="text-sm text-gray-400 space-y-1">
+                                <li>• Projet complexe multi-physique</li>
+                                <li>• Présentation PowerPoint des résultats</li>
+                                <li>• Support pour publication/recherche</li>
+                                <li>• Révisions illimitées</li>
+                                <li>• Livraison 5-7 jours</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" onclick="closeModal()" class="block w-full py-3 rounded-xl bg-primary text-dark font-bold text-center hover:bg-secondary transition-colors">Commander ce service</a>
+                `
+            },
+            python: {
+                title: "Python & Data Analysis",
+                icon: "🐍",
+                price: "15$ - 70$",
+                content: `
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3"><span class="text-4xl">🐍</span> Python & Automatisation</h3>
+                    <p class="text-gray-300 mb-6">Scripts Python sur mesure pour automatiser vos tâches répétitives et analyser vos données efficacement.</p>
+                    
+                    <div class="grid gap-4 mb-8">
+                        <div class="glass rounded-xl p-4">
+                            <h4 class="font-bold text-primary mb-2">Basic (15$)</h4>
+                            <p class="text-sm text-gray-400">Script simple, 1 fonction, documentation basique</p>
+                        </div>
+                        <div class="glass rounded-xl p-4">
+                            <h4 class="font-bold text-primary mb-2">Standard (35$)</h4>
+                            <p class="text-sm text-gray-400">Script complet avec tests, multi-fonctions, documentation détaillée</p>
+                        </div>
+                        <div class="glass rounded-xl p-4">
+                            <h4 class="font-bold text-primary mb-2">Premium (70$)</h4>
+                            <p class="text-sm text-gray-400">Projet multi-fichiers, architecture professionnelle, guide utilisateur</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-3">Spécialités :</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm">Pandas</span>
+                            <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm">NumPy</span>
+                            <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm">Web Scraping</span>
+                            <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm">Automation</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" onclick="closeModal()" class="block w-full py-3 rounded-xl bg-primary text-dark font-bold text-center hover:bg-secondary transition-colors">Commander ce service</a>
+                `
+            },
+            excel: {
+                title: "Excel & VBA Expert",
+                icon: "📊",
+                price: "15$ - 70$",
+                content: `
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3"><span class="text-4xl">📊</span> Excel & VBA</h3>
+                    <p class="text-gray-300 mb-6">Solutions Excel professionnelles pour automatiser vos reporting et créer des outils sur mesure.</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex justify-between items-center glass rounded-xl p-4">
+                            <div>
+                                <h4 class="font-bold">Basic</h4>
+                                <p class="text-sm text-gray-400">Formules avancées + mise en forme</p>
+                            </div>
+                            <span class="text-2xl font-bold text-primary">15$</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center glass rounded-xl p-4">
+                            <div>
+                                <h4 class="font-bold">Standard</h4>
+                                <p class="text-sm text-gray-400">Dashboard interactif + macros simples</p>
+                            </div>
+                            <span class="text-2xl font-bold text-primary">35$</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center glass rounded-xl p-4">
+                            <div>
+                                <h4 class="font-bold">Premium</h4>
+                                <p class="text-sm text-gray-400">Outil VBA complet + formation vidéo</p>
+                            </div>
+                            <span class="text-2xl font-bold text-primary">70$</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" onclick="closeModal()" class="block w-full py-3 rounded-xl bg-primary text-dark font-bold text-center hover:bg-secondary transition-colors">Commander ce service</a>
+                `
+            },
+            video: {
+                title: "Montage Vidéo Pro",
+                icon: "🎬",
+                price: "10$ - 45$",
+                content: `
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3"><span class="text-4xl">🎬</span> Montage Vidéo Professionnel</h3>
+                    <p class="text-gray-300 mb-6">Édition vidéo de qualité pour YouTube, cours en ligne et présentations corporatives.</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-8">
+                        <div class="glass rounded-xl p-4 text-center">
+                            <div class="text-primary font-bold text-xl mb-2">Basic</div>
+                            <div class="text-2xl font-bold mb-2">10$</div>
+                            <ul class="text-sm text-gray-400 text-left space-y-1">
+                                <li>• 5 min de vidéo</li>
+                                <li>• Coupes simples</li>
+                                <li>• Livraison 48h</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass rounded-xl p-4 text-center border-2 border-primary">
+                            <div class="text-primary font-bold text-xl mb-2">Standard ⭐</div>
+                            <div class="text-2xl font-bold mb-2">25$</div>
+                            <ul class="text-sm text-gray-400 text-left space-y-1">
+                                <li>• 10 min de vidéo</li>
+                                <li>• Sous-titres inclus</li>
+                                <li>• Transitions fluides</li>
+                                <li>• Livraison 24h</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass rounded-xl p-4 text-center">
+                            <div class="text-primary font-bold text-xl mb-2">Premium</div>
+                            <div class="text-2xl font-bold mb-2">45$</div>
+                            <ul class="text-sm text-gray-400 text-left space-y-1">
+                                <li>• 20 min de vidéo</li>
+                                <li>• Effets avancés</li>
+                                <li>• Musique libre de droits</li>
+                                <li>• Révisions illimitées</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-primary/10 rounded-xl p-4 mb-6">
+                        <p class="text-sm text-primary font-semibold">✨ Spécialité : Sous-titres bilingues FR/EN parfaitement synchronisés</p>
+                    </div>
+                    
+                    <a href="#contact" onclick="closeModal()" class="block w-full py-3 rounded-xl bg-primary text-dark font-bold text-center hover:bg-secondary transition-colors">Commander ce service</a>
+                `
+            }
+        };
+        
+        function showServiceDetail(service) {
+            const modal = document.getElementById('serviceModal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = serviceDetails[service].content;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('serviceModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Fermer modal avec Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // Animation au scroll pour les sections
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            fadeObserver.observe(section);
+        });
+    </script>
+</body>
+</html>
